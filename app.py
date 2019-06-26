@@ -63,7 +63,7 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
             print(self.rddata)
             state = json.loads(self.rddata)['state']
             #self.rddata = '{"speech": "It is turned '+state+'", "displayText": "It is turned '+state+'"}'
-            self.rddata = '{"fulfillmentText": '+state+',"fulfillmentMessages": [{"text" : { "text" : ['state+'] }}],"source": sourceURL}';
+            self.rddata = '{"fulfillmentText": '+state+',"fulfillmentMessages": [{"text" : { "text" : ['+state+'] }}],"source": sourceURL}';
 
             response = '\r\n'.join([
                 'HTTP/1.1 200 OK',
