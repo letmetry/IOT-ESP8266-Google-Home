@@ -47,6 +47,7 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
             #{"location": "living", "state": "on", "device": "lights"}
             if 'what' in googleRequestJson['queryResult']['queryText']: #queryResult.parameters
                 ESPparameters = googleRequestJson['queryResult']['parameters']
+                print(ESPparameters)
                 ESPparameters['query'] = '?'
             else:
                 ESPparameters = googleRequestJson['queryResult']['parameters']
@@ -63,7 +64,7 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
             print(self.rddata)
             state = json.loads(self.rddata)['state']
             #self.rddata = '{"speech": "It is turned '+state+'", "displayText": "It is turned '+state+'"}'
-            self.rddata = '{"fulfillmentText": '+state+',"fulfillmentMessages": [{"text" : { "text" : ['+state+'] }}],"source": sourceURL}';
+            self.rddata = '{"fulfillmentText": '+ESPparameters+',"fulfillmentMessages": [{"text" : { "text" : ['+ESPparameters+'] }}],"source": sourceURL}';
 
             response = '\r\n'.join([
                 'HTTP/1.1 200 OK',
